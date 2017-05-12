@@ -2,3 +2,10 @@
 
 *.obj
 *.exe
+*.ilk
+*.pdb
+
+
+# Specific shit
+.vscode
+vc120.pdb
