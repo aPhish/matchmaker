@@ -49,7 +49,20 @@ public:
     }
 
     void dump() {
+        cout << " Waiting List:" << endl;
+        for (size_t i : waiting) {
+            cout << "  ";
+            people[i].dump();
+        }
+        cout << endl << " Games: " << endl;
         
+        for (size_t i = 0; i < games.size(); ++i) {
+            cout << "   Game " << i << ":" << endl;
+            for (size_t player_idx : games[i]) {
+                cout << "     ";
+                people[player_idx].dump();
+            }
+        }
     }
 
 private:
