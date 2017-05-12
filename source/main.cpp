@@ -22,10 +22,12 @@ private:
     string m_name;
 };
 
-class WaitingList {
+
+
+class Session {
 public:
 
-    WaitingList(deque<Person> initial) {
+    Session(deque<Person> initial) {
         m_people = initial;
 
         for (Person p : m_people) {
@@ -66,7 +68,7 @@ int main(int argc, char** argv) {
   };
  
 
-  WaitingList waiting(people);
+  Session waiting(people);
 
   cout << "Picking a game" << endl;
   deque<Person> game = waiting.pick_game();
