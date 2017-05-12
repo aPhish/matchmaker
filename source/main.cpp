@@ -28,29 +28,35 @@ class Session {
 public:
 
     Session(deque<Person> initial) {
-        m_people = initial;
+        people = initial;
 
-        for (Person p : m_people) {
-            p.dump();
+        size_t i = 0;
+        for (Person p : people) {
+            waiting.push_back(i++);
         }
     }
 
-    deque<Person> pick_game() {
-        // Just the 4 that have been waiting the longest
+    void create_game() {
 
-        deque<Person> output;
-        if (m_people.size() < 4) return output;
-        
+        if (waiting.size() < 4) return;
+
+        deque<size_t> game;
         for (int i = 0; i < 4; ++i) {
-            output.push_back(m_people.front());
-            m_people.pop_front();
+            game.push_back(waiting.front());
+            waiting.pop_front();
         }
-        return output;
+        games.push_back(game);
+    }
+
+    void dump() {
+        
     }
 
 private:
 
-  deque<Person> m_people;
+  deque<Person> people;
+  deque<size_t> waiting;
+  deque<deque<size_t>> games;
 };
 
 int main(int argc, char** argv) {
@@ -68,18 +74,12 @@ int main(int argc, char** argv) {
   };
  
 
-  Session waiting(people);
+  Session session(people);
 
   cout << "Picking a game" << endl;
-  deque<Person> game = waiting.pick_game();
-  if (game.size() == 0) {
-      cout << "Not enough people" << endl;
-      return 1;
-  }
+  session.create_game();
 
-  cout << "On: " << endl;
-  for (Person p : game) {
-      p.dump();
-  }
+  cout << "Session Dump: " << endl;
+  session.dump();
 
 }
